@@ -44,8 +44,8 @@ def tiposGroups(request):
             # y un boolean se guarda en creado, True si fue creado el objeto. 
             try:
                 insert, creado = Comunidad.objects.get_or_create(cod_comunidad = ingrupos['id'],
-                                            nom_comunidad = ingrupos['name'] + " - Inactiva", 
-                                            descrip = "Agregar Descripcion",
+                                            nom_comunidad = ingrupos['name'], 
+                                            descrip = "Activar y Agregar Descripción",
                                             hubi_comuni = 'Activar',
                                             coor_comuni='0')
                 if creado:                     
@@ -53,7 +53,7 @@ def tiposGroups(request):
             except IntegrityError:
                 #Si hay un cambio de nombre que no provenga desde cyclos, habra un error de integridad
                 # y entrara aqui, aca obtendre el qreryset con la id del del campo cod_comunidad.
-                #luego comparare el nombre del grupo de la BD de esa fila con el nombre del grupo que traigo desde cyclos y lo cambiare
+                #luego comparare el nombre del grupo de la BD de esa fila con el nombre del grupo que traigo desde cyclos y se cambia
                 #por el de cyclos.
                 cambionom = Comunidad.objects.get(cod_comunidad = ingrupos['id'])
                 #print(cambionom.nom_comunidad)
@@ -63,8 +63,8 @@ def tiposGroups(request):
                                 
     else:
         f'No se pudo hacer hacer la conexión code :{r.status_code}'
-    
-    viewg.append(Comunidad.objects.all()[:4]) 
+    #Grupos guardados de forma random en la lista
+    viewg.append(Comunidad.objects.order_by('?')[:8])
     viewg.append(count)
     return  viewg
 

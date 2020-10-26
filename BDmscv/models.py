@@ -38,20 +38,15 @@ class Usuario(models.Model): #Actualizar modelo BD
     usuario_activo = models.BooleanField(default=True)
     usuario_admin = models.BooleanField(default=False)
 
+class data(models.Model):
+    id_data = models.BigAutoField(primary_key=True)
+    fecha_add = models.DateField(auto_now_add=True)
+    cant_usuarios = models.IntegerField(max_length=500)  
+    cant_nodos = models.IntegerField(max_length=500)
+    cant_transacc = models.IntegerField(max_length=500)
+    sum_valpos = models.IntegerField(max_length=500)
 
 
-class Rol(models.Model):
-    cod_rol = models.BigAutoField(primary_key= True)
-    cod_per = models.ForeignKey(Usuario, on_delete= models.CASCADE, verbose_name="Codigo de la persona")
-    nom_rol = models.TextChoices('Rol de la persona', 'COCOM BODECOM')
-    fecha_ele_rol = models.DateField('Cuando fue elegido', null= False)
-    fecha_ter_rol = models.DateField(blank=True,null=True)
 
-class Evento(models.Model):
-    cod_evento = models.BigAutoField(primary_key= True)
-    cod_comunidad = models.ForeignKey(Comunidad, on_delete= models.CASCADE, verbose_name="Codigo de la Comunidad")
-    nom_evento = models.CharField('Nombre del evento',max_length=100, null= False)
-    hubi_eve = models.CharField('Direccion del evento',max_length= 100, null= False)
-    coor_eve = models.IntegerField('Coordenadas para google maps',blank=True,null=True)
-    fecha_crea_eve = models.DateField(auto_now=True) 
-    fecha_reali_eve = models.DateField('Cuando se va a realizar el evento')
+
+

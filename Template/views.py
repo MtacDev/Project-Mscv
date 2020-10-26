@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse #(este metodo nos permite cont
 import requests                                                  #(render devuelve un plantilla html renderizada)
 import json
 from Template.config import Auth
-from BDmscv.models import Comunidad
+from BDmscv.models import Comunidad, data
 from django.db import IntegrityError
 
  
@@ -12,6 +12,12 @@ def home(request):
     viewg = tiposGroups(request)
     cantusu = cantUsuarios(requests)
     ctranc = cantTransacc(request)
+    '''dato = data(cant_usuarios = cantusu, 
+                cant_nodos =  viewg[1], 
+                cant_transacc = int(ctranc[0]),
+                sum_valpos = int(ctranc[1]}))'''
+    
+
     return render(request, "paginas/home.html",{'viewgrupos':viewg[0], 
                                                 'cantg':viewg[1], 
                                                 'cantusu':cantusu, 
@@ -23,7 +29,7 @@ def tiposGroups(request):
     auth = Auth()
     grupos =  []
     viewg = []
-    count = 0
+    countnodos = 0
     r = requests.get('https://communities.cyclos.org/valpos/api/users/data-for-search?fields=&fromMenu=false', 
                         auth=(auth.getUser(), 
                         auth.getPass()))
@@ -36,7 +42,7 @@ def tiposGroups(request):
         for tipogroup in resultObject: 
             if tipogroup['kind'] == 'memberGroup' :
                 grupos.append(tipogroup)     
-                count = count + 1
+                countnodos = countnodos + 1
         #Busco en la BD si la id del grupo esta agregada, si no esta se agrega
                 
         for ingrupos in grupos:
@@ -65,19 +71,19 @@ def tiposGroups(request):
         f'No se pudo hacer hacer la conexión code :{r.status_code}'
     #Grupos guardados de forma random en la lista
     viewg.append(Comunidad.objects.order_by('?')[:8])
-    viewg.append(count)
+    viewg.append(countnodos)
     return  viewg
 
 def cantUsuarios(requests):
     auth = Auth()
-    count = 0
+    countUsu = 0
     r = requests.get('https://communities.cyclos.org/valpos/api/users?roles=&statuses=', 
                         auth=(auth.getUser(), 
                         auth.getPass()))
     parsedJsonObject = json.loads(r.text)
     for display in parsedJsonObject:
-        count=count + 1
-    return count        
+        countUsu=countUsu + 1
+    return countUsu        
             
 def cantTransacc(request):
     auth = Auth() 
@@ -89,3 +95,5 @@ def cantTransacc(request):
     ctranc.append(parsedJsonObject[0]['count'])
     ctranc.append(parsedJsonObject[0]['sum'])
     return ctranc
+
+def inserdata():

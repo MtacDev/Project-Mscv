@@ -12,12 +12,12 @@ def home(request):
     viewg = tiposGroups(request)
     cantusu = cantUsuarios(requests)
     ctranc = cantTransacc(request)
-    '''dato = data(cant_usuarios = cantusu, 
+    dato = data(cant_usuarios = cantusu, 
                 cant_nodos =  viewg[1], 
                 cant_transacc = int(ctranc[0]),
-                sum_valpos = int(ctranc[1]}))'''
+                sum_valpos = float(ctranc[1]))
+    dato.save()
     
-
     return render(request, "paginas/home.html",{'viewgrupos':viewg[0], 
                                                 'cantg':viewg[1], 
                                                 'cantusu':cantusu, 
@@ -96,4 +96,3 @@ def cantTransacc(request):
     ctranc.append(parsedJsonObject[0]['sum'])
     return ctranc
 
-def inserdata():

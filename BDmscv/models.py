@@ -41,10 +41,10 @@ class Usuario(models.Model): #Actualizar modelo BD
 class data(models.Model):
     id_data = models.BigAutoField(primary_key=True)
     fecha_add = models.DateField(auto_now_add=True)
-    cant_usuarios = models.IntegerField(max_length=500)  
-    cant_nodos = models.IntegerField(max_length=500)
-    cant_transacc = models.IntegerField(max_length=500)
-    sum_valpos = models.IntegerField(max_length=500)
+    cant_usuarios = models.IntegerField()  
+    cant_nodos = models.IntegerField()
+    cant_transacc = models.IntegerField()
+    sum_valpos = models.IntegerField()
 
 
 

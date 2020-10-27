@@ -26,7 +26,7 @@ SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['valpomonedasocial.cl', 'monedasocial.datoslab.cl','127.0.0.1']
 
 
 # Application definition

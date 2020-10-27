@@ -24,7 +24,7 @@ mimetypes.add_type("text/css", ".css", True)
 SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['valpomonedasocial.cl', 'monedasocial.datoslab.cl','127.0.0.1']
 

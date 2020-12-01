@@ -96,3 +96,5 @@ def cantTransacc(request):
     ctranc.append(parsedJsonObject[0]['sum'])
     return ctranc
 
+def reglamento(request):
+    return render(request, "paginas/reglamento.html")

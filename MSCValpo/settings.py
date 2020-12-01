@@ -26,7 +26,10 @@ SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['valpomonedasocial.cl', 'monedasocial.datoslab.cl','127.0.0.1']
+ALLOWED_HOSTS = [*]
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+]
 
 
 # Application definition
@@ -44,7 +47,25 @@ INSTALLED_APPS = [
     'usuario',
     'corsheaders',
 ]
-
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,6 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -86,16 +108,29 @@ WSGI_APPLICATION = 'MSCValpo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Mscvalpo',
-        'USER': 'postgres',
-        'PASSWORD': 'm741852963',
-        'HOST': 'localhost',
-        'PORT': '5432',
+import dj_database_url
+from decouple import config
+
+if DEBUG == True:
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'Mscvalpo',
+            'USER': 'postgres',
+            'PASSWORD': 'm741852963',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+            #coneccion a la base de datos mediante una url de heroku
+            'default': dj_database_url.config(
+                default = config('DATABASE_URL')
+            )
+        }
+    }
 
 
 # Password validation
@@ -143,3 +178,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
     os.path.join(BASE_DIR, 'Template','paginas','assets'), 
 ]
+#django no carga archivos estaticos en produccion
+
+#con esta linea de codigo se puede mostrar img css y mas
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

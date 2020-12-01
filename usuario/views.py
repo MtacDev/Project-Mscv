@@ -4,3 +4,5 @@ import requests
 
 def acclogin(request):
     return render(request, "accTemplate/login.html")
+
+

@@ -1,0 +1,1 @@
+web: gunicorn MSCValpo.wsgi --log-file -

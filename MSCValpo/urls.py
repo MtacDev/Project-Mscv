@@ -19,8 +19,12 @@ from django.urls import path
 from Template import views as template
 from usuario import views as usuario
 
+from django.config import settings
+from django.config.urls.static import static
+
 urlpatterns = [
     path('',template.home, name = 'home'),
+    path('reglamento/',template.reglamento, name = 'reglamento'),
     path('login/',usuario.acclogin, name = 'login'),
     path('admin/', admin.site.urls)
-]
+] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

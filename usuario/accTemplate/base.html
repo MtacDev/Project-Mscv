@@ -6,12 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>MSC Valpo</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -24,17 +19,43 @@
   <link href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/venobox/venobox.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  
 
   <!-- Template Main CSS File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
 
 </head>
 <body>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <img src="{% static 'img/logo_1.png' %}" class="" alt="">
+      <div class="logo mr-auto">
+        <h2 class="text-light"><a href=""><span>&#8704alpo</span></a></h2>
+        <h3 class="text-light" style="font-size: medium;"><a href=""><span>Moneda Social</span></a></h3>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#hero">Inicio</a></li>
+          <li><a href="#saber-mas">Saber más</a></li>
+          <li><a href="#nodos">Nodos</a></li>
+          <li><a href="#sumate">Participa </a></li>
+          <li><a href="reglamento/">Reglamento </a></li>
+          <li class="get-started"><a href="#saber-mas">Empieza</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
 {% block content %}
 
 
 {% endblock %}
 </body>
+<script src="{% static 'js/carousel.js' %}"></script>
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>

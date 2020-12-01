@@ -18,6 +18,7 @@ mccabe==0.6.1
 Pillow==7.2.0
 psycopg2==2.8.6
 pylint==2.5.3
+python-decouple==3.3
 pytz==2020.1
 requests==2.24.0
 six==1.15.0

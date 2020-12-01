@@ -26,7 +26,7 @@ SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
@@ -125,7 +125,7 @@ if DEBUG == True:
     }
 else:
     DATABASES = {
-            #coneccion a la base de datos mediante una url de heroku
+            #coneccion a la base de datos mediante una url a heroku
             'default': dj_database_url.config(
                 default = config('DATABASE_URL')
             )

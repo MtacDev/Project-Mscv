@@ -130,7 +130,7 @@ else:
                 default = config('DATABASE_URL')
             )
         }
-    }
+    
 
 
 # Password validation

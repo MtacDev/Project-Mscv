@@ -26,5 +26,9 @@ urlpatterns = [
     path('',template.home, name = 'home'),
     path('reglamento/',template.reglamento, name = 'reglamento'),
     path('login/',usuario.acclogin, name = 'login'),
+    path('Bienvenido/',usuario.Bienvenido, name = 'Bienvenido'),
+    path('reporte/',usuario.Reporte_Act, name = 'reporte'),
+    path('modulo/',usuario.Modulo, name = 'modulo'),
+    path('Historial/',usuario.Historial, name = 'Historial'),
     path('admin/', admin.site.urls)
-] +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

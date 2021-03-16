@@ -1,22 +1,21 @@
 {% extends 'paginas/base.html' %}
 
 {% load  static %} 
+
 {% block content %}
   <!-- ======= Header ======= -->
  
-
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <section id="hero" class="d-flex align-items-center" style = "margin-top: 5vh; margin-bottom: 0vh;height:110%;">
 
-    <div class="container" >
-      <div class="row" style="padding-top: 5%;">
+    <div class="container" class="d-flex" >
+      <div class="row" >
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Confía en tu comunidad, construye vínculos y comparte bienes o servicios.</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">∀alpo es una moneda social y comunitaria creada en el contexto del estallido social de Octubre 2019 y la pandemia del COVID de 2020. Tiene por objetivo fortalecer los vínculos solidarios entre vecin@s de una comunidad facilitando el intercambio basado en apoyo mutuo.</h2>
-          <div data-aos="fade-up" data-aos-delay="800">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSclNXER1H1TKOgN6xQwUP-DuNYMGX_Gt4iRtapBS7Gt7X3ucQ/viewform" class="btn btn-outline-primary scrollto">Registra tu Comunidad</a>
-            <a href="https://drive.google.com/file/d/1aVp52DY7sYO4tj3kPJ2sD-NL3HiHM-BK/preview" class="venobox btn-watch-video vbox-item" style="padding-left: 5%;" data-vbtype="video" data-autoplay="true"> Ver Video <i class="icofont-play-alt-2"></i></a>
-          </div>
+          <h1 data-aos="fade-up" style="font-size:40px;line-height:50px;">Confía en tu comunidad, construye vínculos y comparte bienes o servicios.</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400" style="margin-bottom: 50px;">∀alpo es una moneda social y 
+          <strong>comunitaria</strong>
+          creada en el contexto del estallido social de Octubre 2019 y la pandemia del COVID de 2020. Tiene por objetivo fortalecer 
+          los vínculos solidarios entre vecin@s de una comunidad facilitando el intercambio basado en apoyo mutuo.<br> Incubándose en Valparaíso y alrededores.</h2>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
           <img src="{% static 'img/MONEDA-SOCIAL-POSITIVO.png' %}" class="img-fluid animated" alt="" style="padding-left: 25%;padding-right: 25%;">
@@ -30,66 +29,37 @@
   <main id="main">
 
     <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients ">
-      <div class="container">
+    <section id="clients" class="clients" >
+      <div class="container" >
 
         <div class="row">
 
           <div class="col-lg-3  col-md-4 col-6">
-            <img src="{% static 'img/clients/NODO-AL.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
+            <img style="filter: grayscale(0)" src="{% static 'img/clients/NODO-AL.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
           </div>
 
           <div class="col-lg-3  col-md-4 col-6">
-            <img src="{% static 'img/clients/NODO-CA.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+            <img style="filter: grayscale(0)"  src="{% static 'img/clients/NODO-CA.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
           </div>
 
           <div class="col-lg-3  col-md-4 col-6">
-            <img src="{% static 'img/clients/NODO-PW.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+            <img style="filter: grayscale(0)"  src="{% static 'img/clients/NODO-PW.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
-            <img src="{% static 'img/clients/NODO-UPLA.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+            <img style="filter: grayscale(0)"  src="{% static 'img/clients/NODO-UPLA.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
           </div>
    
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
-    <!-- ======= Equivalance Section ======= -->
-    <section id="equivale" class="">
-      <div class="container">
-        <div class="section-title" data-aos="fade-up">
-          <h2>Equivalencia</h2>
-          <p>Dado que no existe transformación de ∀alpos a pesos ni de pesos a ∀alpos, se utiliza la siguiente equivalencia como referencia:</p>
-        </div>
-      </div> 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm" data-aos="fade-up">
-            
-          </div>
-          <div class="col-sm" data-aos="fade-up">
-            <div class="card border-dark  text-center" style="max-width: 25rem;">
-              <div class="card-header">1 ∀alpo equivale a mil pesos</div>
-              <div class="card-body text-dark">
-                <h4 class="card-title">1 ∀alpo <strong>≈</strong> $1000 pesos</h4>
-                
-              </div>
-            </div>
-          </div>
-          <div class="col-sm" data-aos="fade-up">
-            
-          </div>
-        </div>
-      </div>
-    </section><!-- End Equivalence Section -->
-
+    </section>
     <!-- ======= About Us Section ======= -->
-    <section id="saber-mas" class="about">
+    <section id="saber-mas" class="">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>En que consiste</h2>
+          <h2>Qué es</h2>
         </div>
 
         <div class="row content">
@@ -97,7 +67,6 @@
             <p>
               Consiste en una herramienta de apoyo entre los y las integrantes de una comunidad con el objetivo de generar vínculos de confianza y potenciar otra Economía, la Economía Social y Solidaria. 
               A diferencia de la Economía de la escasez, en la Economía Social la verdadera riqueza radica en las personas, en los vínculos que estas crean y en el cuidado del medioambiente. 
-
             </p>
             <ul>
               <li><i class="ri-check-double-line"></i> Facilitar el apoyo mutuo entre personas que participan de una comunidad</li>
@@ -113,17 +82,16 @@
               <br>
               Apoyamos la transformación de los clientes y consumidores en ciudadan@s prosumidores (productores + consumidores) 
               integrantes de una comunidad que comparten, ofrecen y reciben: tiempo, saberes, productos y creaciones propias, 
-              bienes comunes y productos básicos.
-              
-
-              
+              bienes comunes y productos básicos.           
             </p>
-            <a href="https://communities.cyclos.org/valpos#login" class="btn-learn-more">INGRESA/REGISTRATE AQUI</a>
+            <a href="https://communities.cyclos.org/valpos#login" role="button" style="color:#3498db;border-color:#3498db;" class="btn btn-outline-primary btn-learn-more">INGRESA/REGISTRATE AQUI</a>
           </div>
         </div>
 
       </div>
     </section><!-- End About Us Section -->
+
+  
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
@@ -131,7 +99,7 @@
 
         <div class="row">
           <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start" data-aos="fade-right" data-aos-delay="150">
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR9GbON3ODapo5TZyORtHrsNvTInTyC_vyL0t5a0UMP49gKJoTWOjlZQ062TbDuPw2QXVY3Zg_-Rh7b/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSrxmcX6vpgsW0raGtr_qDHs65Wmz4ZAAd7BNqOP8DiqYAhC-q_7WeqXZRuoSeQpJli96XBwpITfGxG/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
           </div>
 
           <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
@@ -176,30 +144,115 @@
       </div>
     </section><!-- End Counts Section -->
 
- 
+      </section><!-- End Clients Section -->
+    <!-- ======= Equivalance Section ======= -->
+    <section id="equivale" class="">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Equivalencia</h2>
+          <p>Dado que no existe transformación de ∀alpos a pesos ni de pesos a ∀alpos, se utiliza la siguiente equivalencia como referencia:</p>
+        </div>
+      </div> 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm" data-aos="fade-up">
+            
+          </div>
+          <div class="col-sm" data-aos="fade-up">
+            <div class="card border-dark  text-center" style="max-width: 25rem;">
+              <div class="card-header">1 ∀alpo equivale a mil pesos</div>
+              <div class="card-body text-dark">
+                <h4 class="card-title">1 ∀alpo <strong>≈</strong> $1000 pesos</h4>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-sm" data-aos="fade-up">
+            
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Equivale Section -->
+
+    <section id="Comofun" class="pricing">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Cómo funciona</h2>
+         
+        </div>
+
+        <div class="row">
+
+         
+
+          <div class="col-lg-8 offset-lg-2">
+            <div class="box recommended" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{% static 'img/5pasos_3.png'%}" alt="" width="600" height="650"> 
+            </div>
+          </div>
+
+        
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+
+
+    
+     <section id="Movil" class="">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Aplicación  Móvil</h2>
+          <p>Con esta aplicación móvil podrás realizar intercambios de ∀alpos, utilizando tu <strong>teléfono celular</strong>.</p>
+          <p>Diponible en la Play store de Google y la App Store de Apple</p>
+          <a href="https://play.google.com/store/apps/details?id=org.cyclos.mobile"> 
+            <img style="width: 200px;" src="{% static 'img/googlestore.png' %}" class="img-fluid animated" alt=""></a>
+          <a href="https://apps.apple.com/us/app/cyclos-4-mobile/id829007510">       
+            <img style="width: 184px;height:52.5px;" src="{% static 'img/appstore.png' %}" class="img-fluid animated" alt=""></a>
+        </div>
+      </div> 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm section-title" data-aos="fade-up" >
+            <h4>Como configurar la aplicación de Cyclos para su uso.</h4><br>
+            <video width="640" height="353" controls>
+              <source src="{% static 'video/explicativoCyclos.mp4' %}" type="video/mp4">
+              
+               Your browser does not support the video tag.
+            </video>
+        </div>
+      </div>
+    </section><!-- End Equivalence Section -->
+
     
     <section id="nodos" class="more-services">
     
     <div class="section-title" data-aos="fade-up">      
       <div class="container"> 
         <div class="section-title" data-aos="fade-up">
-            <h2>Nodos</h2>
+            <h2>Quiénes participan</h2>
             <p>Comunidades que son parte de la red </p>
           </div>
           
         <div class="row">
-         {% for grupos in viewgrupos %}   
-          <div class="col-md-6 d-flex align-items-stretch" style="padding-bottom: 5%;">
-            <div class="card" style="background-image: url('{{grupos.image_co }}');padding-top: 70% ;" data-aos="fade-up" data-aos-delay="100">
-              <div class="card-body">
-                <h5 class="card-title">{{grupos.nom_comunidad}}</h5>
-                <p class="card-text">
-                  {{grupos.descrip}}
-                </p>             
-              </div>
-            </div>
-          </div> 
-          {% endfor %}      
+        {% for grupos in viewgrupos %}
+            {% if grupos.is_active == True %}   
+                <div class="col-md-6 d-flex align-items-stretch" style="padding-bottom: 5%;">
+                  <div class="card" style="background-image: url('{{grupos.image_co }}');padding-top: 70% ;" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-body">
+                      <h5 class="card-title">{{grupos.nom_comunidad}}</h5>
+                      <p class="card-text">
+                        {{grupos.descrip}}
+                      </p>             
+                    </div>
+                  </div>
+                </div> 
+             {% endif %} 
+        {% endfor %}      
        </div>
        
       </div>
@@ -207,21 +260,21 @@
   
     
     <!-- ======= Testimonials Section ======= -->
-    <section id="sumate" class="testimonials section-bg">
-      <div class="container">
-        <div class="section-title" data-aos="fade-up">
-          <h2>Súmate </h2>
-          <p>con tu comunidad </p>
-        </div>
+    <section id="sumate" class="testimonials ">
+      
         <div class="documentation  bg-white text-center">
-          <div class="container testimonials ">
-              <div class="col-lg-8 offset-lg-2">
-                
-                <h1 id="conecta">Súmate con tu comunidad</h1>
-                <iframe src="https://drive.google.com/file/d/1aVp52DY7sYO4tj3kPJ2sD-NL3HiHM-BK/preview" width="640" height="353"></iframe>
-                <p class="lead">Envíanos tus datos y el de tu comunidad, llenando el siguiente (breve) formulario de 
-                  contacto y te conectaremos para invitarte a ser parte de la <span class="text-success">Red de Moneda Social y Comunitaria ∀alpo.</span></p>
-                <a href="https://forms.gle/g4BqJD3rNqymE56K8" target="_blank" class="btn btn-outline-primary btn-lg mt-4">Completar formulario</a>
+        <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Conecta </h2>
+        </div>
+          <div class="container testimonials " data-aos="fade-up">
+              <div class="col-lg-8 offset-lg-2">    
+                <p class="lead">Mail:  hola@valpomonedasocial.cl<span class="">
+                <br>Instagram: <a href= "https://www.instagram.com/valpomonedasocial/" >valpomonedasocial </a> </span>
+                <br>Consultas, capacitación y feria virtual de intercambio todos los viernes.
+                <br> Sala Zoom ID 878 0326 0531" Incluyendo el afiche de ferias de los viernes. 
+                </p>
+               
               </div>
         
           </div>
@@ -231,40 +284,6 @@
     </section><!-- End Testimonials Section -->
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-6 text-lg-left text-center">
-          <div class="">
-            &copy; 2020 <strong>Incubándose </strong>con <img src="{% static 'img/istockphoto-949849640-170x170.jpg' %}" width="7%" height="7%" alt=""> en
-          
-          
-            <a href="https://datoslab.cl/">DatosLab.cl</a>
-          </div>
-        </div>
-    
-        <div class="row">
-
-          <div class=" col-md-4 col-6">
-            <img src="{% static 'img/clients/upla-c.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
-          </div>
-
-          <div class=" col-md-4 col-6">
-            <img src="{% static 'img/clients/vcm.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
-          </div>
-
-          <div class="col-md-4 col-6">
-            <img src="{% static 'img/clients/dgv.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
-          </div>
-   
-        </div>
-       
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
   {% endblock %}

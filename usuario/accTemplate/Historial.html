@@ -1,0 +1,282 @@
+{% extends  'accTemplate/base2.html' %}
+
+{% load static %} 
+{% block content %}
+
+<div class="d-flex flex-column" id="content-wrapper">
+  <div id="content">
+   
+  <div class="container">
+      <div class="row">
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+          <div class="col" style="padding-top: 10px;text-align: center;"><label class="col-form-label" style="text-align: center;font-size: 38px;color: rgb(41,42,47);">Actividades Comunitarias</label></div>
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+      </div>
+      <div class="row">
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+          <div class="col" style="padding-top: 10px;">
+              <p style="text-align: justify;">Es esta pagina encontrara un registro histórico de las actividades comunitarias llevadas a cabo.</p>
+          </div>
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+      </div>
+      <div class="row">
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+        <div class="col" style="padding-top: 10px;"><label class="col-form-label" style="width: 310px;">Buscar actividades comunitarias por fecha:</label></div>
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+    </div>
+    <div class="row">
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+        <div class="col" style="padding-top: 10px;"><input type="date" /><label>  hasta el  </label><input type="date" /></div>
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+    </div>
+    <div class="row">
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+        <div class="col" style="padding-top: 10px;">
+            <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Actividades por Confirmar  </p>
+        </div>
+        
+        <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+    </div>
+    {% for elemnts in por_confirm %}
+      <div class="row">
+          <div class="col" style="max-width: 18%;padding-top: 10px;width: 115px;"></div>
+          <div class="col" style="padding-top: 10px; ">
+            
+              <div class="table-responsive" style="border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-style: solid;border-radius: 5px;min-height: 250px;max-height: 600px;height: 100%;">
+                  
+                <table class="table">
+                      <thead>
+                          <tr>
+                              <th style="width: 304px;border-right-width: 1px;border-right-style: solid;">Nombre de la Actividad:</th>
+                              <th>{{ elemnts.1 }} </th>     
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td style="border-right-width: 1px;border-right-style: solid;">Agradecimiento en ∀alpos:</td>
+                            <td>
+                                {{ elemnts.7 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-right-width: 1px;border-right-style: solid;">Actividad realizada el:</td>
+                            <td>
+                                {{ elemnts.2 }}
+                            </td>
+                        </tr>
+                          <tr>
+
+                              <td style="border-right-width: 1px;border-right-style: solid;">Acta de reunión:</td>
+                              <td>
+                                {% if elemnts.3 != '' %}
+                                <a href ="{% static elemnts.3  %}" >Descargar</a>
+                                {% endif %}
+                                </td>
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;">Participantes de la actividad:</td>
+                              <td>
+                                  
+                                  {% for personas in elemnts.9  %}
+
+                                  <li type="square">{{ personas }} </li>
+                                      
+                                  {% endfor %}
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;">Imagen de la actividad:</td>
+                              <td>
+                                
+                                  {% if elemnts.5 != '' %}
+                                   <a href ="{% static elemnts.5 %}" >link de la imagen</a>
+                                  <img class="rounded img-fluid" src="{% static elemnts.5  %}" >
+                                 </td>   
+                                  {% endif %}
+   
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;padding-top: 12px;padding-bottom: 12px;">Descripción de la Actividad</td>
+                              <td style="padding-bottom: 12px;">{{ elemnts.6 }} </td>
+                          </tr>
+                          
+                      </tbody>    
+                  </table>
+                   <!-- Button trigger modal -->
+                  <input type="button" value="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                         style="float: right; margin: 5px;" onclick="passData('{{ elemnts.0 }}','{{ elemnts.1 }}')">
+                  </input> 
+              </div>
+          </div> 
+
+          <div class="col" style="max-width: 18%;padding-top: 10px;width: 148px;"><label></label><label></label></div>
+      </div>
+      <div class="col" style="padding-top: 50px;padding-left: 10px; padding-bottom:50px">
+        <legend class="text-center" style="font-size: 19px;color: rgb(0,0,0);">Confirmar participantes de la actividad comunitaria</legend>
+        
+        <form action="/Historial/" method="POST">
+        <div>
+            {% csrf_token %}
+            <fieldset style="text-align: center;">
+                
+                {% if elemnts.8  == 'confirmacion1' %}
+                
+                  <div class="custom-control custom-checkbox custom-control-inline ">
+                    <input type="hidden" id="reporteid" name="reporteid" value="{{elemnts.0}}">
+                    <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}"> 
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}" class="custom-control-input " required />
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}">Autorizo pago de recompensa</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline border-bottom border-warning">
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter }}{{elemnts.0}}" class="custom-control-input" disabled />
+                    <label class="custom-control-label" for="{{ forloop.counter }}{{elemnts.0}}">Falta 2da autorización</label>
+                </div>  
+                <div class="col" style="padding-top: 10px;text-align: center; ">
+                     <button class="btn btn-primary" type="submit"  style="background: #347ab8;"  >Confirmar</button>
+                </div>
+                {% endif %}
+
+                {% if elemnts.8  == 'confirmacion2' and elemnts.11 != id %}
+                  <div class="custom-control custom-checkbox custom-control-inline border-bottom border-success">
+                    <input type="hidden" id="reporteid" name="reporteid" value="{{elemnts.0}}">
+                    <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}">
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}" class="custom-control-input" disabled checked/>
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}">Autorizado</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter }}{{elemnts.0}}" class="custom-control-input" required />
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter }}{{elemnts.0}}">Autorizo pago de recompensa</label>
+                </div>  
+                <div class="col" style="padding-top: 10px;text-align: center; ">
+                    <button class="btn btn-primary" type="submit"  style="background: #347ab8;" >Confirmar</button>
+                 </div>
+                {% endif %}
+                {% if elemnts.8  == 'confirmacion2' and elemnts.11 == id %}  
+                <p>La 2da autorizacion la debe hacer otra persona </p>
+                <div class="custom-control custom-checkbox custom-control-inline border-bottom border-success">
+                    <input type="hidden" id="reporteid" name="reporteid" value="{{elemnts.0}}">
+                    <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}">
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}" class="custom-control-input" disabled checked/>
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}">Autorizado</label>
+                </div>
+                
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    
+                    <input type="checkbox" id="customCheckInline{{ forloop.counter }}{{elemnts.0}}" class="custom-control-input" disabled/>
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter }}{{elemnts.0}}">Segunda autorizacion</label>
+                </div>     
+                
+            </fieldset>
+        </div>
+        <div class="col" style="padding-top: 10px;text-align: center; ">
+            <button class="btn btn-primary" type="submit"  style="background: #347ab8;" disabled >Confirmar</button>
+        </div>
+        
+        {% endif %}
+
+        </form>
+    </div>
+      {% endfor %}
+      <div class="row">
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+          <div class="col" style="height:50%;padding-top: 10px;overflow:hidden;padding-bottom: 10px">
+          <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Ultimo reporte registrado </p>
+          <div class="table-responsive" style="border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-style: solid;border-radius: 5px;min-height: 250px;max-height: 600px;height: 100%;">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th style="width: 304px;border-right-width: 1px;border-right-style: solid;">Nombre de la Actividad:</th>
+                              <th>{{ ultimo.nom_act }}</th>     
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td style="border-right-width: 1px;border-right-style: solid;">Agradecimiento en ∀alpos:</td>
+                            <td>
+                                {{ ultimo.cant_valpos }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-right-width: 1px;border-right-style: solid;">Actividad realizada el:</td>
+                            <td>
+                                {{ ultimo.fecha_act }}
+                            </td>
+                        </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;">Acta de reunión:</td>
+                              <td>
+                              {% if ultimo.acta_reu != '' %}
+                              
+                                <a href ="{% static ultimo.acta_reu  %}" >Descargar</a>
+                              {% endif %}    
+                                </td>
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;">Participantes de la actividad:</td>
+                              <td>
+                                  
+                                  {% for personas in ultper.0 %}
+
+                                  <li type="square">{{ personas }}</li>
+                                      
+                                  {% endfor %}
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;">Imagen de la actividad:</td>
+                              <td>
+                                
+                                  {% if ultimo.img_act != '' %}
+                                   <a href ="{% static ultimo.img_act %}" >link de la imagen</a>
+                                  <img class="rounded img-fluid" src="{% static ultimo.img_act  %}" >
+                                 </td>   
+                                  {% endif %}
+   
+                          </tr>
+                          <tr>
+                              <td style="border-right-width: 1px;border-right-style: solid;padding-top: 12px;padding-bottom: 12px;">Descripción de la Actividad</td>
+                              <td style="padding-bottom: 12px;">{{ ultimo.desc_act }}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          
+
+          </div>
+          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+      </div>
+     
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¿Está seguro?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/Historial/" class="form" method="GET">
+            {% csrf_token %}
+            <div class="modal-body" id="modalReporte" name="modalReporte">
+                
+            </div>
+            <div class="modal-footer">
+                {{ form }} 
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" value="Eliminar" class="btn btn-danger">Eliminar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/funciones.js' %}"></script>
+{% endblock %}      
+

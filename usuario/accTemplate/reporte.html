@@ -1,0 +1,84 @@
+
+{% extends  'accTemplate/base2.html' %}
+
+
+{% load  static %}
+
+{% block content %}  
+ <!-- jQuery -->
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>          
+            <div class="container">
+                <div class="row">
+                    <div class="col" style="margin-right: 200px;">
+                        <p style="text-align: center;font-size: 36px;">Reportar una Actividad</p>
+                        {% if msj != ''  %}
+                            <div class="alert alert-success" role="alert">
+                                <br>
+                                <p style="text-align: center;font-size: 20px;">{{ msj }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                 
+                <form action="" enctype="multipart/form-data" method="POST">         
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Cantidad de ∀alpos de Agradecimiento: </label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.cantAgradecimiento}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Nombre de la Actividad:</label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.nomAct}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Fecha de la Actividad:</label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.fechaAct}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Subir acta de reunión:</label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">{{ fomerr.actareu }}{{ form.actareu }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Ingresar participantes:</label><label></label>
+                            
+                        </div>
+                        <div class="col" style="padding-top: 10px;">
+                                <select multiple="multiple" class="options form-control" id="textarea" name='textarea'>
+                                    {% for users in usuarios %}
+                                        <option selected value="{{ users.shortDisplay }} - {{ users.display }}">{{ users.display }}</option>                                 
+                                    {% endfor %}                       
+                                </select>
+                                <br>
+                                <input id="copy" type="button" class="btn btn-outline-success" value="Copiar">
+                                <input id="remove" type="button"  class="btn btn-outline-danger" value="Remover">
+                                <br><br>
+                                {{ form.ingrepart }}
+                                
+                        </div>
+                        <div class="col" style="padding-top: 10px;"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Imagen de la Actividad:</label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">{{ form.imgAct }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Descripcion de la Actividad:</label><label></label></div>
+                        <div class="col" style="padding-top: 10px;">
+                            <div class="form-group">
+                                {{ form.descact}}
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col" style="max-width: 18%;padding-top: 10px;"><label class="col-form-label"></label></div>
+                        <div class="col" style="padding-top: 10px;"><button class="btn btn-primary" style="background: #347ab8;margin-top: 27px;">Guardar reporte</button>
+                            </div>
+                    </div>
+
+                </form>
+            
+        <script src="{% static 'js/funciones.js' %}"></script>
+    {% endblock %}       

@@ -1,31 +1,58 @@
 from django.shortcuts import render, HttpResponse #(este metodo nos permite contestar a una peticion, devolviendo un codigo de progamacion)
-import requests                                                  #(render devuelve un plantilla html renderizada)
-import json
 from Template.config import Auth
 from BDmscv.models import Comunidad, data
 from django.db import IntegrityError
+import time
+import requests                                                  
+import json
 
- 
 # Create your views here.
 def home(request):    
     
     viewg = tiposGroups(request)
     cantusu = cantUsuarios(requests)
     ctranc = cantTransacc(request)
-    dato = data(cant_usuarios = cantusu, 
+    """
+    hoy = time.strftime("%Y-%m-%d") 
+    dato = data(fecha_add = hoy,
+                cant_usuarios = cantusu, 
                 cant_nodos =  viewg[1], 
                 cant_transacc = int(ctranc[0]),
                 sum_valpos = float(ctranc[1]))
     dato.save()
+    """
     
     return render(request, "paginas/home.html",{'viewgrupos':viewg[0], 
                                                 'cantg':viewg[1], 
                                                 'cantusu':cantusu, 
                                                 'canttr':ctranc[0], 
                                                 'sumtr':ctranc[1]})
+    
+def reglamento(request):
+    
+    return render(request, "paginas/reglamento.html")
+
+def task_api_cyclos():
+
+    c_crea_guarda_grupos.delay()
+    resultadoCG= c_cantidad_grupos.delay()
+    resultadoCU= c_cantidad_usuarios.delay()
+    resultadoCST= c_cantidad_suma_transacciones.delay()
+    hoy = time.strftime("%Y-%m-%d") 
+
+    print(resultadoCG)
+
+    dato = data(fecha_add = hoy,
+                cant_usuarios = resultadoCU, 
+                cant_nodos =  resultadoCG, 
+                cant_transacc = int(resultadoCST[0]),
+                sum_valpos = float(resultadoCST[1]))
+    dato.save()
+    
 
 def tiposGroups(request):
     #obtiene la lista de la Api se transforma en objeto de json y se extrae los datos necesarios
+
     auth = Auth()
     grupos =  []
     viewg = []
@@ -40,9 +67,9 @@ def tiposGroups(request):
         resultObject = parsedJsonObject['groups']
         #separo y obtengo solo los grupos tipo memeberGroup
         for tipogroup in resultObject: 
-            if tipogroup['kind'] == 'memberGroup' :
+            if tipogroup['kind'] == 'memberGroup' and tipogroup['groupSet'] == 'nodoValpos' :
                 grupos.append(tipogroup)     
-                countnodos = countnodos + 1
+                
         #Busco en la BD si la id del grupo esta agregada, si no esta se agrega
                 
         for ingrupos in grupos:
@@ -69,20 +96,30 @@ def tiposGroups(request):
                                 
     else:
         f'No se pudo hacer hacer la conexión code :{r.status_code}'
-    #Grupos guardados de forma random en la lista
-    viewg.append(Comunidad.objects.order_by('?')[:8])
+        
+    #Grupos guardados en la lista
+    viewg.append(Comunidad.objects.all().values())
+    nodos = Comunidad.objects.all().values()
+
+    for elemnts in nodos:    
+        if elemnts['is_active'] == True:
+            countnodos = countnodos + 1
+
     viewg.append(countnodos)
     return  viewg
 
 def cantUsuarios(requests):
     auth = Auth()
     countUsu = 0
-    r = requests.get('https://communities.cyclos.org/valpos/api/users?roles=&statuses=', 
+    r = requests.get('https://communities.cyclos.org/valpos/api/users?groups=nodoValpos&includeGroup=true&includeGroupSet=true&orderBy=alphabeticallyAsc&roles=member&statuses=active&pageSize=5000', 
                         auth=(auth.getUser(), 
                         auth.getPass()))
     parsedJsonObject = json.loads(r.text)
-    for display in parsedJsonObject:
-        countUsu=countUsu + 1
+ 
+    for tipoGroups in parsedJsonObject:
+        if  tipoGroups['groupSet']['internalName'] == "nodoValpos":
+            countUsu=countUsu + 1
+
     return countUsu        
             
 def cantTransacc(request):
@@ -96,5 +133,3 @@ def cantTransacc(request):
     ctranc.append(parsedJsonObject[0]['sum'])
     return ctranc
 
-def reglamento(request):
-    return render(request, "paginas/reglamento.html")

@@ -1,0 +1,72 @@
+{% extends  'accTemplate/base2.html' %}
+
+{% load  static %} 
+{% block content %}
+            <div class="container">
+                <div class="row">
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                    <div class="col" style="padding-top: 10px;text-align: center;"><label class="col-form-label" style="text-align: center;font-size: 38px;color: rgb(41,42,47);">Bienvenido {{ name }}</label></div>
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                </div>
+                <div class="row">
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                    <div class="col" style="padding-top: 10px;">
+                        <p style="text-align: justify;">Es esta pagina usted podrá ver los reportes de las actividades comunitarias pasadas, ver imágenes de ellas y los participantes.</p>
+                    </div>
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                </div>
+                <div class="row">
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                    <div class="col" style="padding-top: 10px;">
+                        <p style="text-align: justify;">También podrá acceder a los módulos de aprendizaje que se encuentran a la izquierda.</p>
+                    </div>
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                </div>
+                <div class="row">
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                    <div class="col" style="padding-top: 10px;">
+                        <!-- Start: Carousel_Image_Slider --><div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static 'img/slider/plaza-waddington.jpg?h=57ca759e344c2ae0930b40cc5af1bfa2' %}" alt="First slide" style="height: 400px; width: 100%;">
+        <div class="carousel-caption d-none d-md-block">
+            <h1></h1>
+            <p></p>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'img/slider/torreAlmendral_Ug5h0Mf.png?h=fd4826b92f8a572d9b9752689878e3c6' %}" alt="Second slide" style="height: 400px; width: 100%;">        
+        <div class="carousel-caption d-none d-md-block">
+            <h1></h1>
+            <p></p>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'img/slider/valpo.png?h=40a731caa5a711184e03f72adeb3cf6e' %}" alt="Third slide" style="height: 400px; width: 100%;">        
+        <div class="carousel-caption d-none d-md-block">
+            <h1></h1>
+            <p></p>
+        </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Siguiente</span>
+  </a>
+</div>
+
+
+                        <!-- End: Carousel_Image_Slider -->
+                    </div>
+                    <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
+                </div>
+{% endblock %}      

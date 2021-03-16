@@ -18,28 +18,48 @@
         <div class="row">
           <div class="col-md-6" style="background-color:#f6f6f6;border-bottom-left-radius: .25rem;border-top-left-radius: .25rem;">
                       
-                    <div class="main" style="padding: 10%;">
-                      <div class="login-main-text">
-                          <h2>Accede<br> A tu cuenta</h2>
-                          <p>Logueate o registrate aqui para poder ingresar
-                          </p>
-                          <p id="output"></p>
+                    <div class="main " style="padding: 10%;">
+                      <div class="login-main-text d-flex justify-content-center">
+                        <div class="container login-main-text d-flex justify-content-center">
+                          <div class="row flex-column ">
+                              <div class="d-flex justify-content-center" >
+                                <h2 style="align-text: center;">Accede a tu cuenta</h2>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>Ingresa o registrate en Cyclos poder ingresar</p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                              <p id="output">
+                                {{message}}
+                              </p>
+                              </div>
+                          </div>
                         </div>
-                        
-                          <div class="login-form">
-                              <form enctype="multipart/form-data" method="post" onsubmit="return false"  name="fileinfo" id="fileinfo">
+                      </div>                 
+                          <div class="d-flex justify-content-center" >
+                            
+                              <form action="" class="form"  method="POST" id="fileinfo">
+
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label>Nombre de Usuario</label>
-                                    <input type="text" id="user" name="user"  class="form-control" placeholder="User Name">
-                                </div>
-                                <div class="form-group">
-                                    <label>Contraseña</label>
-                                    <input type="password" id="pass" name="pass" class="form-control" placeholder="Password">
-                                </div>
-                                
-                                <button type="submit" onclick="sendForm();" class="btn btn-black">Ingresar</button>
-                                <button type="submit" class="btn btn-secondary">Registrarse</button>
+                                <div class="container">
+                                  <div class="row flex-column">
+                                      <div class="">
+                                        <label>Nombre de Usuario:</label>
+                                      </div>
+                                      <div class="" style="padding-bottom: 15px;">
+                                        {{form.user }}
+                                      </div>
+                                      <div class="">
+                                        <label>Contraseña:</label>
+                                      </div>
+                                      <div class="" style="padding-bottom: 15px;">
+                                        {{form.password}}
+                                      </div>
+                                  </div>
+                              </div>
+                                       
+                                <button type="submit" style="color:#3498db;border-color:#3498db;" class="btn btn-outline-dark">Ingresar</button>
+                                <a type="button" style="background-color:#3498db;" href='https://communities.cyclos.org/valpos#login' class="btn btn-secondary">Registrarse</a>
                               </form>
                               
                           </div>
@@ -65,36 +85,5 @@
     </section>
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-6 text-lg-left text-center">
-          <div class="copyright">
-            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-            <a href="#intro" class="scrollto">Home</a>
-            <a href="#about" class="scrollto">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-  <script src="{% static 'js/stream.js' %}"></script>
 
   {% endblock %}

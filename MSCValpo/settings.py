@@ -24,7 +24,7 @@ mimetypes.add_type("text/css", ".css", True)
 SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'usuario',
     'corsheaders',
+   
 ]
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -77,6 +78,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+ 
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -124,8 +126,9 @@ if DEBUG == True:
         }
     }
 else:
+    #coneccion a la base de datos mediante una url a heroku
     DATABASES = {
-            #coneccion a la base de datos mediante una url a heroku
+            #Se crea una variavle de entorno DATABASE_URL que guarda la coneccion
             'default': dj_database_url.config(
                 default = config('DATABASE_URL')
             )
@@ -171,14 +174,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT=  os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'root')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
-    os.path.join(BASE_DIR, 'Template','paginas','assets'), 
+    os.path.join(BASE_DIR,'Template','paginas','assets'),
+    os.path.join(BASE_DIR,'media'), 
 ]
 #django no carga archivos estaticos en produccion
 
 #con esta linea de codigo se puede mostrar img css y mas
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'

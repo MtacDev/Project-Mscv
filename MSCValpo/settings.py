@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'MSCValpo.wsgi.application'
 import dj_database_url
 from decouple import config
 
-if DEBUG == :
+if DEBUG == True:
     
     DATABASES = {
         'default': {

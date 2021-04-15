@@ -81,7 +81,7 @@ def Modulo(request):
 
 
 def Historial(request):
-    
+    try:
         reporte = Reporte.objects.values_list('cod_rep',
                                                 'nom_act',
                                                 'fecha_act',
@@ -118,7 +118,9 @@ def Historial(request):
                 'resultPago': refresh[1], 
             }
             return render(request, "accTemplate/Historial.html", context = context)
-    
+    except Exception as e:
+        logger.error(e)
+        return redirect('/login')
           
 def graphs(request):
     try:
@@ -435,7 +437,7 @@ def realizarPago(request, pagoReporte):
         'Content-Type': 'application/json',   
         "X-Requested-With": "XMLHttpRequest"              
       }
-    url = 'https://communities.cyclos.org/valpos/api/system/payments/preview'
+    url = 'https://communities.cyclos.org/valpos/api/system/payments'
     
     names = splitData(request, pagoReporte[0]['nom_partici'])
     authQuery = AuthPago.objects.filter(cod_rep = pagoReporte[0]['cod_rep']).values() 
@@ -476,7 +478,7 @@ def realizarPago(request, pagoReporte):
                 parsedobj = json.loads(r.text)
                 print(r.status_code)
                 print(names[0][i])   
-                #storagePago(request, parsedobj, hoy)
+                storagePago(request, parsedobj, hoy)
             else:
                 print('Error' + str(r.status_code))
                 pagonNoRealizado.append(names[0][i])

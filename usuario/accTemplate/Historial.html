@@ -4,8 +4,7 @@
 {% block content %}
 
 <div class="d-flex flex-column" id="content-wrapper">
-  <div id="content">
-   
+ <div class="content">
   <div class="container">
       <div class="row">
           <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
@@ -29,18 +28,48 @@
         <div class="col" style="padding-top: 10px;"><input type="date" /><label>  hasta el  </label><input type="date" /></div>
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
-        <div class="col" style="padding-top: 10px;">
-            <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Actividades por Confirmar  </p>
+        <div class="col" style="padding-top: 10px;" >
+            <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Actividades por Confirmar {{resultPago.0}} </p>
         </div>
         
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
     </div>
-    {% for elemnts in por_confirm %}
-      <div class="row">
+    {% if resultPago.0 == 'Realizado'  %}
+        <div class="alert alert-success" role="alert">
+            <br>
+            <p style="text-align: center;font-size: 20px;">Agradecimiento entregado con exito a
+             los participantes de la actividad comunitaria: {{ resultPago.1 }}</p>
+        </div>
+    {% endif %}
+    {% if resultPago.0 == 'Incompleto'  %}
+        <div class="alert alert-warning" role="alert">
+            <br>
+            <p style="text-align: center;font-size: 20px;">Agradecimientos entregados de forma Incompleta. 
+                Participantes que no recibieron el Agradecimiento {{ resultPago.1 }}</p>
+        </div>
+    {% endif %}
+    {% if resultPago.0 == 'No Realizado'  %}
+        <div class="alert alert-danger" role="alert">
+            <br>
+            <p style="text-align: center;font-size: 20px;">No se pudo completar la entrega Agradecimientos.</p>
+        </div>
+    {% endif %}
+    {% if resultPago.0 == 'Rechazado'  %}
+        <div class="alert alert-danger" role="alert">
+            <br>
+            <p style="text-align: center;font-size: 20px;">La entrega de Agradecimientos ha sido Rechazado</p>
+        </div>
+    {% endif %}
+    {% if por_confirm == '' %} 
+        <p style= "text-align: center">No se han encontrado Reportes </p>
+    {% else %} 
+      {% for elemnts in por_confirm %}
+    
+      <div class="row" >
           <div class="col" style="max-width: 18%;padding-top: 10px;width: 115px;"></div>
-          <div class="col" style="padding-top: 10px; ">
+          <div class="col" style="padding-top: 10px; " >
             
               <div class="table-responsive" style="border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-style: solid;border-radius: 5px;min-height: 250px;max-height: 600px;height: 100%;">
                   
@@ -112,10 +141,10 @@
 
           <div class="col" style="max-width: 18%;padding-top: 10px;width: 148px;"><label></label><label></label></div>
       </div>
-      <div class="col" style="padding-top: 50px;padding-left: 10px; padding-bottom:50px">
+      <div class="col"  style="padding-top: 50px;padding-left: 10px; padding-bottom:50px">
         <legend class="text-center" style="font-size: 19px;color: rgb(0,0,0);">Confirmar participantes de la actividad comunitaria</legend>
         
-        <form action="/Historial/" method="POST">
+        <form action="/Historial/" method="POST" id="form-submit" >
         <div>
             {% csrf_token %}
             <fieldset style="text-align: center;">
@@ -124,7 +153,7 @@
                 
                   <div class="custom-control custom-checkbox custom-control-inline ">
                     <input type="hidden" id="reporteid" name="reporteid" value="{{elemnts.0}}">
-                    <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}"> 
+                    <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}">
                     <input type="checkbox" id="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}" class="custom-control-input " required />
                     <label class="custom-control-label" for="customCheckInline{{ forloop.counter0 }}{{elemnts.0}}">Autorizo pago de recompensa</label>
                 </div>
@@ -151,8 +180,10 @@
                     <label class="custom-control-label" for="customCheckInline{{ forloop.counter }}{{elemnts.0}}">Autorizo pago de recompensa</label>
                 </div>  
                 <div class="col" style="padding-top: 10px;text-align: center; ">
-                    <button class="btn btn-primary" type="submit"  style="background: #347ab8;" >Confirmar</button>
-                 </div>
+
+                    <button class="btn btn-primary"  type="submit" id="btnConfirm" style="background: #347ab8;" >Confirmar</button>
+                    
+                </div>
                 {% endif %}
                 {% if elemnts.8  == 'confirmacion2' and elemnts.11 == id %}  
                 <p>La 2da autorizacion la debe hacer otra persona </p>
@@ -172,18 +203,22 @@
             </fieldset>
         </div>
         <div class="col" style="padding-top: 10px;text-align: center; ">
-            <button class="btn btn-primary" type="submit"  style="background: #347ab8;" disabled >Confirmar</button>
+            <button class="btn btn-primary"  type="submit" id = "btnConfirm"   style="background: #347ab8;" disabled >Confirmar</button>
         </div>
         
         {% endif %}
 
         </form>
-    </div>
-      {% endfor %}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    
       <div class="row">
           <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
           <div class="col" style="height:50%;padding-top: 10px;overflow:hidden;padding-bottom: 10px">
           <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Ultimo reporte registrado </p>
+          {% if ultimo %}
           <div class="table-responsive" style="border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-style: solid;border-radius: 5px;min-height: 250px;max-height: 600px;height: 100%;">
                   <table class="table">
                       <thead>
@@ -245,12 +280,12 @@
                   </table>
               </div>
           
-
+        {% endif %}  
           </div>
+          
           <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
       </div>
-     
-  </div>
+    </div>  
 </div>
 
 <!-- Modal -->
@@ -271,12 +306,23 @@
             <div class="modal-footer">
                 {{ form }} 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" value="Eliminar" class="btn btn-danger">Eliminar</button>
+                <button type="submit"  value="Eliminar" class="btn btn-danger">Eliminar</button>
             </div>
         </form>
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="SpinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <img  class="rounded mx-auto d-block" alt="" 
+        id="loading-image" src="{% static 'img/gif/moneySpinner.gif' %}" />
+      </div>
+    </div>
+  </div>
+
   <script src="{% static 'js/funciones.js' %}"></script>
+
 {% endblock %}      
 

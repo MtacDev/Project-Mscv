@@ -8,20 +8,17 @@ import json
 
 # Create your views here.
 def home(request):    
-    
+    dataStats = []
     viewg = tiposGroups(request)
     cantusu = cantUsuarios(requests)
     ctranc = cantTransacc(request)
-    """
-    hoy = time.strftime("%Y-%m-%d") 
-    dato = data(fecha_add = hoy,
-                cant_usuarios = cantusu, 
-                cant_nodos =  viewg[1], 
-                cant_transacc = int(ctranc[0]),
-                sum_valpos = float(ctranc[1]))
-    dato.save()
-    """
-    
+    print(viewg[1])
+    dataStats.extend([cantusu,
+                         viewg[1],
+                         int(ctranc[0]),
+                         float(ctranc[1])])
+    saveData(dataStats)
+   
     return render(request, "paginas/home.html",{'viewgrupos':viewg[0], 
                                                 'cantg':viewg[1], 
                                                 'cantusu':cantusu, 
@@ -32,23 +29,6 @@ def reglamento(request):
     
     return render(request, "paginas/reglamento.html")
 
-def task_api_cyclos():
-
-    c_crea_guarda_grupos.delay()
-    resultadoCG= c_cantidad_grupos.delay()
-    resultadoCU= c_cantidad_usuarios.delay()
-    resultadoCST= c_cantidad_suma_transacciones.delay()
-    hoy = time.strftime("%Y-%m-%d") 
-
-    print(resultadoCG)
-
-    dato = data(fecha_add = hoy,
-                cant_usuarios = resultadoCU, 
-                cant_nodos =  resultadoCG, 
-                cant_transacc = int(resultadoCST[0]),
-                sum_valpos = float(resultadoCST[1]))
-    dato.save()
-    
 
 def tiposGroups(request):
     #obtiene la lista de la Api se transforma en objeto de json y se extrae los datos necesarios
@@ -133,3 +113,15 @@ def cantTransacc(request):
     ctranc.append(parsedJsonObject[0]['sum'])
     return ctranc
 
+def saveData(dataStats):
+
+    hoy = time.strftime("%Y-%m-%d")
+    if not data.objects.filter(fecha_add = hoy):
+        dato = data(fecha_add = hoy,
+                    cant_usuarios = dataStats[0], 
+                    cant_nodos =  dataStats[1], 
+                    cant_transacc = dataStats[2],
+                    sum_valpos = dataStats[3])
+        dato.save()
+    else:
+        print("fecha ya ingresada")

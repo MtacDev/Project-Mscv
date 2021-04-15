@@ -9,28 +9,4 @@ class Migration(migrations.Migration):
         ('BDmscv', '0004_auto_20210108_1230'),
     ]
 
-    operations = [
-        migrations.CreateModel(
-            name='Agradecimiento',
-            fields=[
-                ('cod_recom', models.BigAutoField(primary_key=True, serialize=False)),
-                ('cod_per', models.CharField(max_length=50, verbose_name='Codigo de la Persona')),
-                ('nom_per_agre', models.CharField(max_length=100, verbose_name='Nombre de quien recibe el agradecimiento')),
-                ('from_cuenta', models.CharField(blank=True, max_length=50, null=True, verbose_name='Cuenta proveniente')),
-                ('fecha_agre', models.CharField(blank=True, max_length=50, null=True, verbose_name='Fecha de agradecimiento')),
-                ('descrip_pago', models.CharField(blank=True, max_length=100, null=True, verbose_name='Descripcion del pago')),
-                ('amount', models.CharField(blank=True, max_length=50, null=True, verbose_name='Cantidad depositada')),
-                ('id_transacc', models.CharField(blank=True, max_length=100, null=True, verbose_name='Id de la Transaccion')),
-            ],
-        ),
-        migrations.AlterField(
-            model_name='comunidad',
-            name='image_co',
-            field=models.CharField(blank=True, default='static/img/Comunidad-online.png', max_length=500, null=True, verbose_name='Imagen de referencia'),
-        ),
-        migrations.AlterField(
-            model_name='data',
-            name='fecha_add',
-            field=models.CharField(max_length=50, verbose_name='Fecha de registro'),
-        ),
-    ]
+   

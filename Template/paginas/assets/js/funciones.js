@@ -20,3 +20,19 @@ function passData(id, titulo) {
                                     '<div class="alert alert-warning" id="tituloReporte"> '+ titulo +'</div>';
     document.getElementById("id_elmrepo").value = id;                                
   }
+
+//function spinner() {
+    
+  //  document.getElementById("load").innerHTML = '<img  class="rounded mx-auto d-block" alt="Responsive image"'+ 
+  //    'id="loading-image" src="https://res.cloudinary.com/mtac/image/upload/v1618507609/moneySpinner_cgpxci.gif" />';
+//}
+
+document.getElementById("form-submit").addEventListener("submit", function () {
+    $('#SpinModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+});
+
+
+ 

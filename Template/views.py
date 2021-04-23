@@ -12,7 +12,6 @@ from time import perf_counter
 # Create your views here.
 def home(request):  
     dataStats = []
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     dataCall = asyncio.run(cyclosApiCall())
     tiposGroups(dataCall[0])
     listaGroups = listaGrupos()

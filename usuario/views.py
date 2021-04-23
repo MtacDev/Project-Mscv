@@ -476,8 +476,8 @@ def realizarPago(request, pagoReporte):
                                                                                     auth.getPass()))
             if r.status_code == 200:
                 parsedobj = json.loads(r.text)
-                print(r.status_code)
-                print(names[0][i])   
+                #print(r.status_code)
+                #print(names[0][i])   
                 storagePago(request, parsedobj, hoy)
             else:
                 print('Error' + str(r.status_code))

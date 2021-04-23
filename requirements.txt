@@ -1,7 +1,10 @@
+aiohttp==3.7.4.post0
 amqp==5.0.2
 APScheduler==3.6.3
 asgiref==3.2.10
 astroid==2.4.2
+async-timeout==3.0.1
+attrs==20.3.0
 billiard==3.6.3.0
 celery==5.0.5
 certifi==2020.6.20
@@ -13,9 +16,11 @@ click-repl==0.1.6
 colorama==0.4.3
 dj-database-url==0.5.0
 Django==3.1.1
+django-bootstrap-datepicker-plus==3.0.5
 django-celery-beat==2.1.0
 django-celery-results==2.0.1
 django-cors-headers==3.6.0
+django-environ==0.4.5
 django-filter==2.3.0
 django-hidefield==0.1.2
 django-timezone-field==4.1.1
@@ -27,6 +32,7 @@ kombu==5.0.2
 lazy-object-proxy==1.4.3
 Markdown==3.2.2
 mccabe==0.6.1
+multidict==5.1.0
 Pillow==7.2.0
 prompt-toolkit==3.0.10
 psycopg2==2.8.6
@@ -39,6 +45,7 @@ requests==2.24.0
 six==1.15.0
 sqlparse==0.3.1
 toml==0.10.1
+typing-extensions==3.7.4.3
 tzlocal==2.1
 urllib3==1.25.10
 vine==5.0.0
@@ -46,3 +53,4 @@ wcwidth==0.2.5
 whitenoise==5.2.0
 wincertstore==0.2
 wrapt==1.12.1
+yarl==1.6.3

@@ -133,8 +133,10 @@
                       </tbody>    
                   </table>
                    <!-- Button trigger modal -->
-                  <input type="button" value="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
-                         style="float: right; margin: 5px;" onclick="passData('{{ elemnts.0 }}','{{ elemnts.1 }}')">
+                   {% if staff == True %}
+                        <input type="button" value="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                style="float: right; margin: 5px;" onclick="passData('{{ elemnts.0 }}','{{ elemnts.1 }}')">
+                    {% endif %}
                   </input> 
               </div>
           </div> 
@@ -163,7 +165,7 @@
                     <label class="custom-control-label" for="{{ forloop.counter }}{{elemnts.0}}">Falta 2da autorización</label>
                 </div>  
                 <div class="col" style="padding-top: 10px;text-align: center; ">
-                     <button class="btn btn-primary" type="submit"  style="background: #347ab8;"  >Confirmar</button>
+                     <button class="btn btn-primary" type="submit"  style="background: #347ab8;" data-toggle="modal" data-target="#SpinModal" data-backdrop="static" data-keyboard="false" >Confirmar</button>
                 </div>
                 {% endif %}
 
@@ -181,12 +183,14 @@
                 </div>  
                 <div class="col" style="padding-top: 10px;text-align: center; ">
 
-                    <button class="btn btn-primary"  type="submit" id="btnConfirm" style="background: #347ab8;" >Confirmar</button>
+                    <button class="btn btn-primary"  type="submit" id="btnConfirm" style="background: #347ab8;" data-toggle="modal" data-target="#SpinModal" data-backdrop="static" data-keyboard="false">Confirmar</button>
                     
                 </div>
                 {% endif %}
-                {% if elemnts.8  == 'confirmacion2' and elemnts.11 == id %}  
-                <p>La 2da autorizacion la debe hacer otra persona </p>
+                {% if elemnts.8  == 'confirmacion2' and elemnts.11 == id %}
+                  
+                <p class="alert alert-warning center" style="width: 65%; position: relative; ;"><strong>La segunda autorización la debe hacer otra persona </strong> </p>
+                
                 <div class="custom-control custom-checkbox custom-control-inline border-bottom border-success">
                     <input type="hidden" id="reporteid" name="reporteid" value="{{elemnts.0}}">
                     <input type="hidden" id="confirmacion" name="confirmacion" value="{{elemnts.8}}">
@@ -197,13 +201,10 @@
                 <div class="custom-control custom-checkbox custom-control-inline">
                     
                     <input type="checkbox" id="customCheckInline{{ forloop.counter }}{{elemnts.0}}" class="custom-control-input" disabled/>
-                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter }}{{elemnts.0}}">Segunda autorizacion</label>
+                    <label class="custom-control-label" for="customCheckInline{{ forloop.counter }}{{elemnts.0}}">Segunda autorización</label>
                 </div>     
                 
             </fieldset>
-        </div>
-        <div class="col" style="padding-top: 10px;text-align: center; ">
-            <button class="btn btn-primary"  type="submit" id = "btnConfirm"   style="background: #347ab8;" disabled >Confirmar</button>
         </div>
         
         {% endif %}

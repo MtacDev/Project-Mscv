@@ -7,24 +7,28 @@ import requests
 import json
 import aiohttp
 import asyncio
+import logging
 from time import perf_counter
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):  
     dataStats = []
     dataCall = asyncio.run(cyclosApiCall())
-    tiposGroups(dataCall[0])
+    if  dataCall != 'errorApi':
+        tiposGroups(dataCall[0]) 
+        cantgroups = cantGrupos()
+        cantusu = cantUsuarios(dataCall[1])
+        ctranc = cantTransacc(dataCall[2])
+        
+        dataStats.extend([cantusu,
+                            cantgroups,
+                            int(ctranc[0]),
+                            float(ctranc[1])])
+        saveData(dataStats)
     listaGroups = listaGrupos()
-    cantgroups = cantGrupos()
-    cantusu = cantUsuarios(dataCall[1])
-    ctranc = cantTransacc(dataCall[2])
-    
-    dataStats.extend([cantusu,
-                         cantgroups,
-                         int(ctranc[0]),
-                         float(ctranc[1])])
-    saveData(dataStats)
-    
+
     dinamicStats = data.objects.order_by('fecha_add').last()
     
     return render(request, "paginas/home.html",{'viewgrupos':listaGroups, 
@@ -117,22 +121,25 @@ async def get_response(session, url):
         return response
 
 async def cyclosApiCall():
+    try:
+        dataCall = []
+        async with aiohttp.ClientSession() as session:
+            urls =[
+                'https://communities.cyclos.org/valpos/api/users/data-for-search?fields=&fromMenu=false',
+                'https://communities.cyclos.org/valpos/api/users?groups=nodoValpos&includeGroup=true&includeGroupSet=true&orderBy=alphabeticallyAsc&roles=member&statuses=active&pageSize=5000',
+                'https://communities.cyclos.org/valpos/api/transfers/summary?kinds=&skipTotalCount=false&transferKinds=', 
+                ]
 
-    dataCall = []
-    async with aiohttp.ClientSession() as session:
-        urls =[
-            'https://communities.cyclos.org/valpos/api/users/data-for-search?fields=&fromMenu=false',
-            'https://communities.cyclos.org/valpos/api/users?groups=nodoValpos&includeGroup=true&includeGroupSet=true&orderBy=alphabeticallyAsc&roles=member&statuses=active&pageSize=5000',
-            'https://communities.cyclos.org/valpos/api/transfers/summary?kinds=&skipTotalCount=false&transferKinds=', 
-            ]
+            tasks = []
+            for url in urls:
+                tasks.append(asyncio.ensure_future(get_response(session, url)))
 
-        tasks = []
-        for url in urls:
-            tasks.append(asyncio.ensure_future(get_response(session, url)))
-
-        result_response = await asyncio.gather(*tasks)
-        for response in result_response:
-            dataCall.append(response)
-        
+            result_response = await asyncio.gather(*tasks)
+            for response in result_response:
+                dataCall.append(response)
+            
+            return dataCall
+    except Exception as e:
+        logger.error(e)
+        dataCall = 'errorApi'
         return dataCall
-

@@ -3,8 +3,8 @@ import json
 
 class Auth(object):
 
-    __password = 'm741852963'
-    __user = 'mtapia'
+    __password = ''
+    __user = ''
 
     def getPass(self):
         return self.__password   

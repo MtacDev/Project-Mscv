@@ -24,8 +24,5 @@ class PublicFilesStorage(S3Boto3Storage):
     file_overwrite = False
    
 
-class PublicVideosStorage(S3Boto3Storage):
-    location = 'videos'
-    default_acl = 'public-read'
-    file_overwrite = False
+
    

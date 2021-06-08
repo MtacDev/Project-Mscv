@@ -532,18 +532,16 @@ def eliminarReporte(request):
     else:
         form = delReporte()
     return form
-
+"""   
 def statsData(request):
     listaMonth = listaMonths()
-    
-
-
+ 
 def listaMonths():
-    """
+    
     Se crea la una lista de cuatro meses y un rango de 28
     dias, apartir del presente mes, contando 4 meses hacia atras
     uno por uno.  
-    """
+   
    
     lista = [] 
     for rmonth in range(0,4):
@@ -562,5 +560,6 @@ def listaMonths():
             monthIni = datetime(datetime.now().year - 1, 12 + ajusteMonth, 1)
             monthEnd = datetime(datetime.now().year - 1, 12 + ajusteMonth, 28)
             lista.append([monthIni.strftime('%Y-%m-%d'), monthEnd.strftime('%Y-%m-%d')])
-    print(lista)       
-    return lista
+    print(lista)   
+
+    return lista """

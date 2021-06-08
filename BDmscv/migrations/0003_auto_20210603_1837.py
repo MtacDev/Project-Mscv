@@ -21,9 +21,5 @@ class Migration(migrations.Migration):
             name='report_image',
             field=models.FileField(storage=MSCValpo.storage_backends.PublicImagesStorage(), upload_to=''),
         ),
-        migrations.AlterField(
-            model_name='reporte',
-            name='report_video',
-            field=models.FileField(storage=MSCValpo.storage_backends.PublicVideosStorage(), upload_to=''),
-        ),
+    
     ]

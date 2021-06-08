@@ -1,6 +1,6 @@
 from django.db import models
 from s3direct.fields import S3DirectField
-from MSCValpo.storage_backends import PublicMediaStorage, PublicImagesStorage, PublicFilesStorage, PublicVideosStorage
+from MSCValpo.storage_backends import PublicMediaStorage, PublicImagesStorage, PublicFilesStorage
 
 
 class Comunidad(models.Model):

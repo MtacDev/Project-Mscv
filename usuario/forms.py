@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import FileExtensionValidator
 
 class Dateinput(forms.DateInput):
     input_type = 'date'
@@ -11,7 +12,7 @@ class ReporteAct(forms.Form):
     cantAgradecimiento = forms.IntegerField()
     nomAct = forms.CharField(label = '', max_length=500)
     fechaAct = forms.DateField(widget=Dateinput)
-    actareu = forms.FileField(required=False,label='')
+    actareu = forms.FileField(required=False,label='', validators=[FileExtensionValidator( ['pdf', 'xls', 'doc','docx','xlsx', 'xlsm'] ) ])
     ingrepart = forms.CharField(required= False ,widget= forms.Select
                            (attrs={'class':'remove form-control',
 				                  'id':'textarea2',

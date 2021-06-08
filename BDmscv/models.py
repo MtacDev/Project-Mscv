@@ -1,5 +1,6 @@
 from django.db import models
-
+from s3direct.fields import S3DirectField
+from MSCValpo.storage_backends import PublicMediaStorage, PublicImagesStorage, PublicFilesStorage, PublicVideosStorage
 
 
 class Comunidad(models.Model):
@@ -33,11 +34,11 @@ class Reporte(models.Model):
     cant_valpos = models.IntegerField('Cantidad de Valpos',blank=True,null=True)
     fecha_act= models.DateField('Fecha de realizacion de la actividad comunitaria',blank=True,null=True)
     nom_act = models.CharField('Nombre de la actividad', max_length= 500, blank=True,null=True)
-    acta_reu = models.FileField('Acta de reunion',blank=True,null=True, upload_to = 'reporte_files/')
     nom_partici = models.CharField('Participantes',max_length= 1000)
-    img_act = models.ImageField('Imagen de la Actividad',blank=True,null=True, upload_to = 'img_act/')
     desc_act = models.CharField('Descripción de la Actividad',max_length= 1000)
     cod_per = models.ForeignKey(Persona, on_delete=models.CASCADE, blank= True, null= True, verbose_name= 'Nombre de quien hizo el reporte')
+    report_image = models.FileField(storage=PublicMediaStorage())
+    report_files = models.FileField(storage=PublicMediaStorage())
     def __str__(self):
         titulo = str(self.cod_rep) + ' | ' + str(self.fecha_act)  
         return titulo 

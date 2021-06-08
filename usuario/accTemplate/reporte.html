@@ -26,19 +26,19 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Cantidad de ∀alpos de Agradecimiento: </label><label></label></div>
-                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.cantAgradecimiento}}</div>
+                        <div class="col" style="padding-top: 10px;">{{form.cantAgradecimiento}}</div>
                     </div>
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Nombre de la Actividad:</label><label></label></div>
-                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.nomAct}}</div>
+                        <div class="col" style="padding-top: 10px;">{{form.nomAct}}</div>
                     </div>
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Fecha de la Actividad:</label><label></label></div>
-                        <div class="col" style="padding-top: 10px;">{{ fomerr }}{{form.fechaAct}}</div>
+                        <div class="col" style="padding-top: 10px;">{{form.fechaAct}}</div>
                     </div>
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Subir acta de reunión:</label><label></label></div>
-                        <div class="col" style="padding-top: 10px;">{{ fomerr.actareu }}{{ form.actareu }}</div>
+                        <div class="col" style="padding-top: 10px;">{{ form.actareu.errors }}{{ form.actareu }}</div>
                     </div>
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Ingresar participantes:</label><label></label>
@@ -61,8 +61,9 @@
                     </div>
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Imagen de la Actividad:</label><label></label></div>
-                        <div class="col" style="padding-top: 10px;">{{ form.imgAct }}</div>
+                        <div class="col" style="padding-top: 10px;">{{ form.imgAct.errors }}{{ form.imgAct }}</div>
                     </div>
+                    
                     <div class="row">
                         <div class="col" style="max-width: 18%;padding-top: 10px;"><label>Descripcion de la Actividad:</label><label></label></div>
                         <div class="col" style="padding-top: 10px;">

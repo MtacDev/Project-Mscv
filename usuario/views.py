@@ -48,7 +48,7 @@ def Bienvenido(request):
 
 def Reporte_Act(request):
 
-    try:
+    
         obj = storageData(request)    
         usuarios = reporteApiUsuarios(request)
         context ={
@@ -61,9 +61,7 @@ def Reporte_Act(request):
             'usuarios':usuarios, 
         }
         return render(request, "accTemplate/reporte.html",context = context)
-    except Exception as e:
-        logger.error(e)
-        return redirect('/login')
+    
 
 def Modulo(request):
 
@@ -81,15 +79,15 @@ def Modulo(request):
 
 
 def Historial(request):
-    try:
+    
         reporte = Reporte.objects.values_list('cod_rep',
                                                 'nom_act',
                                                 'fecha_act',
-                                                'acta_reu',
+                                                'report_files',
                                                 'nom_partici',
-                                                'img_act', 
+                                                'report_image', 
                                                 'desc_act',
-                                                'cant_valpos'
+                                                'cant_valpos',
                                                 ).order_by('fecha_act')
         
         por_confirm = listaReporte(request, reporte)  
@@ -118,9 +116,7 @@ def Historial(request):
                 'resultPago': refresh[1], 
             }
             return render(request, "accTemplate/Historial.html", context = context)
-    except Exception as e:
-        logger.error(e)
-        return redirect('/login')
+   
           
 def graphs(request):
     try:
@@ -269,10 +265,10 @@ def storageData(request):
                                   cant_valpos = cantAgradecimiento, 
                                   fecha_act = fechaAct,
                                   cod_per = Persona.objects.get(cod_per = request.session['id']),
-                                  acta_reu = actareu,
                                   nom_partici = ingrepart,
-                                  img_act = imgPart,
-                                  desc_act = descact)
+                                  desc_act = descact,
+                                  report_image = imgPart,
+                                  report_files = actareu,)
             reporte.save()
 
             #Se crea el registro en AuthPago (BD) del reporte recien creado
@@ -286,11 +282,11 @@ def storageData(request):
             obj.append(form)
             obj.append(msj)
         else:
-            form = form.errors  
+            print(form.errors)
     else:
         form = ReporteAct()
-        obj.append(form)
-        obj.append('')
+    obj.append(form)
+    obj.append('')
 
     return obj
 
@@ -438,7 +434,7 @@ def realizarPago(request, pagoReporte):
         "X-Requested-With": "XMLHttpRequest"              
       }
     url = 'https://communities.cyclos.org/valpos/api/system/payments'
-    
+   
     names = splitData(request, pagoReporte[0]['nom_partici'])
     authQuery = AuthPago.objects.filter(cod_rep = pagoReporte[0]['cod_rep']).values() 
     
@@ -447,13 +443,13 @@ def realizarPago(request, pagoReporte):
             hoy = str(datetime.utcnow().replace(microsecond=100).isoformat())
             data = {
                     "amount": pagoReporte[0]['cant_valpos'],
-                    "description": "Agradecimiento por la participación en la actividad comunitaria: "+ pagoReporte[0]['desc_act'],
+                    "description": "Agradecimiento por la participación en la actividad comunitaria: "+ pagoReporte[0]['nom_act'],
                     "currency": "∀alpos",
-                    "type": "organization.pagoUsu",
+                    "type": "debit.toUser",
                     "customValues": {                      
                     },
                     "subject": names[1][i],
-                    "fromName": "organization",
+                    "fromName": "Cuenta de débito",
                     "toName": names[0][i],
                     "installmentsCount": 0,
                     "firstInstallmentDate": hoy + "Z",
@@ -473,14 +469,15 @@ def realizarPago(request, pagoReporte):
                     "scheduling": "direct"
                     }    
             r = requests.post(url,data= json.dumps(data), headers = headers , auth = (auth.getUser(), 
-                                                                                    auth.getPass()))
-            if r.status_code == 200:
+                                                                                  auth.getPass()))
+                                                                    
+            if r.status_code == 200 or r.status_code == 201:
                 parsedobj = json.loads(r.text)
                 #print(r.status_code)
                 #print(names[0][i])   
                 storagePago(request, parsedobj, hoy)
             else:
-                print('Error' + str(r.status_code))
+                print('Error ' + str(r.status_code))
                 pagonNoRealizado.append(names[0][i])
 
         if not pagonNoRealizado:

@@ -1,6 +1,8 @@
 {% extends  'accTemplate/base2.html' %}
 
 {% load static %} 
+
+
 {% block content %}
 
 <div class="d-flex flex-column" id="content-wrapper">
@@ -98,7 +100,7 @@
                               <td style="border-right-width: 1px;border-right-style: solid;">Acta de reunión:</td>
                               <td>
                                 {% if elemnts.3 != '' %}
-                                <a href ="{% static elemnts.3  %}" >Descargar</a>
+                                <a  target="_blank" href ="https://valpoaws.s3.amazonaws.com/media/{{ elemnts.3 }}" >Descargar</a>
                                 {% endif %}
                                 </td>
                           </tr>
@@ -106,7 +108,7 @@
                               <td style="border-right-width: 1px;border-right-style: solid;">Participantes de la actividad:</td>
                               <td>
                                   
-                                  {% for personas in elemnts.9  %}
+                                  {% for personas in elemnts.10 %}
 
                                   <li type="square">{{ personas }} </li>
                                       
@@ -119,12 +121,13 @@
                               <td>
                                 
                                   {% if elemnts.5 != '' %}
-                                   <a href ="{% static elemnts.5 %}" >link de la imagen</a>
-                                  <img class="rounded img-fluid" src="{% static elemnts.5  %}" >
+                                   <a target="_blank" href ="https://valpoaws.s3.amazonaws.com/media/{{ elemnts.5 }}" >link de la imagen</a>
+                                  <img class="rounded img-fluid" src="https://valpoaws.s3.amazonaws.com/media/{{ elemnts.5 }}" >
                                  </td>   
                                   {% endif %}
    
                           </tr>
+                    
                           <tr>
                               <td style="border-right-width: 1px;border-right-style: solid;padding-top: 12px;padding-bottom: 12px;">Descripción de la Actividad</td>
                               <td style="padding-bottom: 12px;">{{ elemnts.6 }} </td>
@@ -146,7 +149,7 @@
       <div class="col"  style="padding-top: 50px;padding-left: 10px; padding-bottom:50px">
         <legend class="text-center" style="font-size: 19px;color: rgb(0,0,0);">Confirmar participantes de la actividad comunitaria</legend>
         
-        <form action="/Historial/" method="POST" id="form-submit" >
+        <form action="/Historial" method="POST" id="form-submit" >
         <div>
             {% csrf_token %}
             <fieldset style="text-align: center;">
@@ -266,13 +269,14 @@
                               <td style="border-right-width: 1px;border-right-style: solid;">Imagen de la actividad:</td>
                               <td>
                                 
-                                  {% if ultimo.img_act != '' %}
-                                   <a href ="{% static ultimo.img_act %}" >link de la imagen</a>
-                                  <img class="rounded img-fluid" src="{% static ultimo.img_act  %}" >
+                                  {% if ultimo.report_image != '' %}
+                                   <a href ="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" >link de la imagen</a>
+                                  <img class="rounded img-fluid" src="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" >
                                  </td>   
                                   {% endif %}
    
                           </tr>
+                    
                           <tr>
                               <td style="border-right-width: 1px;border-right-style: solid;padding-top: 12px;padding-bottom: 12px;">Descripción de la Actividad</td>
                               <td style="padding-bottom: 12px;">{{ ultimo.desc_act }}</td>
@@ -299,7 +303,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="/Historial/" class="form" method="GET">
+        <form action="/Historial" class="form" method="GET">
             {% csrf_token %}
             <div class="modal-body" id="modalReporte" name="modalReporte">
                 

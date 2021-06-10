@@ -75,7 +75,7 @@ class Agradecimiento(models.Model):
     nom_per_agre = models.CharField("Nombre de quien recibe el agradecimiento", max_length=100)
     from_cuenta = models.CharField("Cuenta proveniente", max_length=50, blank= True, null= True)
     fecha_agre = models.CharField("Fecha de agradecimiento", max_length=50, blank= True, null= True)
-    descrip_pago = models.CharField("Descripcion del pago", max_length=100,blank= True, null= True)
+    descrip_pago = models.CharField("Descripcion del pago", max_length=500,blank= True, null= True)
     amount = models.CharField("Cantidad depositada", max_length=50, blank= True, null= True)
     id_transacc = models.CharField("Id de la Transaccion", max_length=100, blank= True, null= True)
 

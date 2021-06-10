@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'MSCValpo.wsgi.application'
 
 
 
-if DEBUG == True:
+if DEBUG == False:
     
     DATABASES = {
         'default': {

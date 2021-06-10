@@ -29,7 +29,7 @@ mimetypes.add_type("text/css", ".css", True)
 SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'MSCValpo.wsgi.application'
 
 
 
-if DEBUG == True:
+if DEBUG == False:
     
     DATABASES = {
         'default': {

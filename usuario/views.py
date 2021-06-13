@@ -5,16 +5,16 @@ import requests
 import json
 from BDmscv.models import Persona, Comunidad, Reporte, AuthPago, Agradecimiento
 from django.views.decorators.csrf import csrf_exempt
-from usuario.config import Auth
 from .forms import userInfo, ReporteAct, delReporte
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 import logging
 import time
+import os
 from datetime import datetime, timedelta
+from dotenv import load_dotenv, find_dotenv
 
-# Create your views here.
-
+load_dotenv(find_dotenv())
 logger = logging.getLogger(__name__)
 
 def acclogin(request):
@@ -164,8 +164,8 @@ def loginData(request):
                     'amount':0,
                     'field':'days'},
                     }
-            r = requests.post(url,data= json.dumps(data), headers = headers , auth = (auth.getUser(), 
-                        auth.getPass()))
+            r = requests.post(url,data= json.dumps(data), headers = headers , auth = (os.environ.get('CYCLOS_USER'), 
+                        os.environ.get('CYCLOS_PASSWORD')))
             if r.status_code == 200:
                  processData(request, r)               
                  obj.append('redirect')                           
@@ -221,8 +221,9 @@ def datainBienvenido(request):
     hacer reportes de actividaes    
      """
     auth = Auth()
-    r = requests.get('https://communities.cyclos.org/valpos/api/users/'+ request.session['id'] + '?fields=permissions.products%2C%20group',auth = (auth.getUser(), 
-                                                                                                       auth.getPass()))
+    r = requests.get('https://communities.cyclos.org/valpos/api/users/'+ request.session['id'] + '?fields=permissions.products%2C%20group',
+                                                                                        auth = (os.environ.get('CYCLOS_USER'), 
+                                                                                        os.environ.get('CYCLOS_PASSWORD')))
     parsedJsonObject = json.loads(r.text)
 
     staff = Persona.objects.filter(cod_per = request.session['id']).values('is_staff')
@@ -299,8 +300,8 @@ def reporteApiUsuarios(request):
     auth = Auth()
     resulUsuarios = requests.get('https://communities.cyclos.org/valpos/api/users?groups=nodoValpos&includeGroup='+
                                         'true&includeGroupSet=true&orderBy=alphabeticallyAsc&roles=member&statuses=active&pageSize=5000',
-                                         auth = (auth.getUser(), 
-                                         auth.getPass()))
+                                         auth = (os.environ.get('CYCLOS_USER'), 
+                                                 os.environ.get('CYCLOS_PASSWORD')))
     parsedJsonObject = json.loads(resulUsuarios.text)
     
     return parsedJsonObject
@@ -468,8 +469,8 @@ def realizarPago(request, pagoReporte):
                     "nfcChallence": "string",
                     "scheduling": "direct"
                     }    
-            r = requests.post(url,data= json.dumps(data), headers = headers , auth = (auth.getUser(), 
-                                                                                  auth.getPass()))
+            r = requests.post(url,data= json.dumps(data), headers = headers , auth = (os.environ.get('CYCLOS_USER'), 
+                                                                                        os.environ.get('CYCLOS_PASSWORD')))
                                                                     
             if r.status_code == 200 or r.status_code == 201:
                 parsedobj = json.loads(r.text)
@@ -532,16 +533,16 @@ def eliminarReporte(request):
     else:
         form = delReporte()
     return form
-"""   
+ 
 def statsData(request):
     listaMonth = listaMonths()
  
 def listaMonths():
-    
+    """
     Se crea la una lista de cuatro meses y un rango de 28
     dias, apartir del presente mes, contando 4 meses hacia atras
     uno por uno.  
-   
+    """
    
     lista = [] 
     for rmonth in range(0,4):
@@ -562,4 +563,4 @@ def listaMonths():
             lista.append([monthIni.strftime('%Y-%m-%d'), monthEnd.strftime('%Y-%m-%d')])
     print(lista)   
 
-    return lista """
+    return lista

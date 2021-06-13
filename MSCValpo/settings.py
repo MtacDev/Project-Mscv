@@ -26,10 +26,10 @@ mimetypes.add_type("text/css", ".css", True)
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2@9tlgkcbmwysc@qmhz)*j$lvv5lno21dgl**3y3-#k54^0xf-'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
@@ -123,9 +123,9 @@ if DEBUG == False:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'Mscvalpo',
-            'USER': 'postgres',
-            'PASSWORD': '741852963',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('USER'),
+            'PASSWORD': os.environ.get('PASSWORD'),
             'HOST': 'localhost',
             'PORT': '5432',
         }
@@ -217,33 +217,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
-#con esta linea de codigo se puede mostrar img css y mas
-"""
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-#AWS S3 config access credentials 
-AWS_ACCESS_KEY_ID = 'AKIAZGP7M2H636BKNCZD'
-AWS_SECRET_ACCESS_KEY = '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' 
-AWS_STORAGE_BUCKET_NAME = 'valpoaws'
-AWS_S3_REGION_NAME = 'us-east-2'
-AWS_S3_ENDPOINT_URL = 'https://s3.us-east-2.amazonaws.com'
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-S3DIRECT_DESTINATIONS = {
-    'primary_destination': {
-        'key': 'images/',
-        'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
-    },
-    'secondary_destination': {
-        'key': 'videos/',
-        'allowed': ['video/mp4'],
-    },
-    'tertiary_destination': {
-        'key': 'files/',
-    },
-}
-"""

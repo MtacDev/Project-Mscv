@@ -1,5 +1,4 @@
 from django.shortcuts import render, HttpResponse #(este metodo nos permite contestar a una peticion, devolviendo un codigo de progamacion)
-from Template.config import Auth
 from BDmscv.models import Comunidad, data
 from django.db import IntegrityError
 import time
@@ -8,8 +7,11 @@ import json
 import aiohttp
 import asyncio
 import logging
+import os
 from time import perf_counter
+from dotenv import load_dotenv, find_dotenv
 
+load_dotenv(find_dotenv())
 logger = logging.getLogger(__name__)
 
 # Create your views here.
@@ -116,7 +118,7 @@ def saveData(dataStats):
 
 async def get_response(session, url):
     auth = Auth() 
-    async with session.get(url, auth=aiohttp.BasicAuth(auth.getUser(), auth.getPass())) as resp:
+    async with session.get(url, auth=aiohttp.BasicAuth(os.environ.get('CYCLOS_USER'), os.environ.get('CYCLOS_PASSWORD'))) as resp:
         response = await resp.json()
         return response
 

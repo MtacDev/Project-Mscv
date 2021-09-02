@@ -16,10 +16,11 @@
       <div class="row">
           <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
           <div class="col" style="padding-top: 10px;">
-              <p style="text-align: justify;">Es esta pagina encontrara un registro histórico de las actividades comunitarias llevadas a cabo.</p>
+              <p style="text-align: justify;">En esta página encontrara un registro histórico de las actividades comunitarias llevadas a cabo.</p>
           </div>
           <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
       </div>
+<!-- 
       <div class="row">
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
         <div class="col" style="padding-top: 10px;"><label class="col-form-label" style="width: 310px;">Buscar actividades comunitarias por fecha:</label></div>
@@ -30,6 +31,7 @@
         <div class="col" style="padding-top: 10px;"><input type="date" /><label>  hasta el  </label><input type="date" /></div>
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
     </div>
+     -->
     <div class="row" >
         <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
         <div class="col" style="padding-top: 10px;" >
@@ -218,79 +220,55 @@
     {% endif %}
 
     
-      <div class="row">
-          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
-          <div class="col" style="height:50%;padding-top: 10px;overflow:hidden;padding-bottom: 10px">
-          <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Ultimo reporte registrado </p>
-          {% if ultimo %}
-          <div class="table-responsive" style="border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-left-style: solid;border-radius: 5px;min-height: 250px;max-height: 600px;height: 100%;">
-                  <table class="table">
-                      <thead>
-                          <tr>
-                              <th style="width: 304px;border-right-width: 1px;border-right-style: solid;">Nombre de la Actividad:</th>
-                              <th>{{ ultimo.nom_act }}</th>     
-                          </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td style="border-right-width: 1px;border-right-style: solid;">Agradecimiento en ∀alpos:</td>
-                            <td>
-                                {{ ultimo.cant_valpos }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border-right-width: 1px;border-right-style: solid;">Actividad realizada el:</td>
-                            <td>
-                                {{ ultimo.fecha_act }}
-                            </td>
-                        </tr>
-                          <tr>
-                              <td style="border-right-width: 1px;border-right-style: solid;">Acta de reunión:</td>
-                              <td>
-                              {% if ultimo.acta_reu != '' %}
-                              
-                                <a href ="{% static ultimo.acta_reu  %}" >Descargar</a>
-                              {% endif %}    
-                                </td>
-                          </tr>
-                          <tr>
-                              <td style="border-right-width: 1px;border-right-style: solid;">Participantes de la actividad:</td>
-                              <td>
-                                  
-                                  {% for personas in ultper.0 %}
-
-                                  <li type="square">{{ personas }}</li>
-                                      
-                                  {% endfor %}
-
-                              </td>
-                          </tr>
-                          <tr>
-                              <td style="border-right-width: 1px;border-right-style: solid;">Imagen de la actividad:</td>
-                              <td>
-                                
-                                  {% if ultimo.report_image != '' %}
-                                   <a href ="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" >link de la imagen</a>
-                                  <img class="rounded img-fluid" src="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" >
-                                 </td>   
-                                  {% endif %}
-   
-                          </tr>
-                    
-                          <tr>
-                              <td style="border-right-width: 1px;border-right-style: solid;padding-top: 12px;padding-bottom: 12px;">Descripción de la Actividad</td>
-                              <td style="padding-bottom: 12px;">{{ ultimo.desc_act }}</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          
-        {% endif %}  
-          </div>
-          
-          <div class="col" style="max-width: 18%;padding-top: 10px;"><label></label><label></label></div>
-      </div>
+      
     </div>  
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Ultimo reporte registrado </p>
+        {% if ultimo %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre de la actividad:</th>
+                        <th>Agradecimiento en Valpos:</th>
+                        <th>Actividad realizada el:</th>
+                        <th>Acta de reunión:</th>
+                        <th>Participantes de la actividad:</th>
+                        <th>Imágen de la actividad:</th>
+                        <th>Descripción de la actividad:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ ultimo.nom_act }}</td>
+                        <td>{{ ultimo.cant_valpos }}</td>
+                        <td>{{ ultimo.fecha_act }}</td>
+                        <td>
+                            {% if ultimo.acta_reu != '' %}
+                            <a href="{% static ultimo.acta_reu  %}" target="_blank" class="btn btn-info">Descargar</a>
+                            {% endif %} 
+                        </td>
+                        <td>
+                            {% for personas in ultper.0 %}
+                            <li type="square">{{ personas }}</li>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if ultimo.report_image != '' %}
+                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" target="_blank" class="btn btn-link">link de la imagen</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ ultimo.desc_act }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endif %}  
+    </div>
 </div>
 
 <!-- Modal -->

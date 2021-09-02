@@ -117,7 +117,7 @@ def saveData(dataStats):
 
 
 async def get_response(session, url):
-    auth = Auth() 
+    # auth = Auth() 
     async with session.get(url, auth=aiohttp.BasicAuth(os.environ.get('CYCLOS_USER'), os.environ.get('CYCLOS_PASSWORD'))) as resp:
         response = await resp.json()
         return response

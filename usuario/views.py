@@ -139,7 +139,7 @@ def loginData(request):
     vaiables de session.    
     """
     obj = []
-    auth = Auth()   
+    # auth = Auth()   
     url = "https://communities.cyclos.org/valpos/api/sessions"
     headers = {
         'Content-Type': 'application/json',   
@@ -220,7 +220,7 @@ def datainBienvenido(request):
     en la base de dato se actualiza el capo is_staff para, que en la vista de pueda
     hacer reportes de actividaes    
      """
-    auth = Auth()
+    # auth = Auth()
     r = requests.get('https://communities.cyclos.org/valpos/api/users/'+ request.session['id'] + '?fields=permissions.products%2C%20group',
                                                                                         auth = (os.environ.get('CYCLOS_USER'), 
                                                                                         os.environ.get('CYCLOS_PASSWORD')))
@@ -297,7 +297,7 @@ def reporteApiUsuarios(request):
     Los resultados estan filtrados desde la url, ver documentacion 
     de la Api de Cyclos.
     """
-    auth = Auth()
+    # auth = Auth()
     resulUsuarios = requests.get('https://communities.cyclos.org/valpos/api/users?groups=nodoValpos&includeGroup='+
                                         'true&includeGroupSet=true&orderBy=alphabeticallyAsc&roles=member&statuses=active&pageSize=5000',
                                          auth = (os.environ.get('CYCLOS_USER'), 
@@ -427,7 +427,7 @@ def realizarPago(request, pagoReporte):
     Se realiza el apgo a los participantes de una actividad comunitaria previa confirmacion
     de 2 personas, ademas se realizan validaciones del pago.
     '''
-    auth = Auth()
+    # auth = Auth()
     pagonNoRealizado = []
     resultado = []
     headers = {

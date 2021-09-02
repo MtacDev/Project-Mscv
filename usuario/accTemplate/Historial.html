@@ -227,8 +227,7 @@
 
 <div class="container">
     <div class="row">
-        <p style="text-align: center;font-size: 20px;color: rgb(38,38,38);">Ultimo reporte registrado </p>
-        {% if ultimo %}
+        <h3>Últimos reportes registrados</h3>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -243,13 +242,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for reporte in reportes %}
                     <tr>
-                        <td>{{ ultimo.nom_act }}</td>
-                        <td>{{ ultimo.cant_valpos }}</td>
-                        <td>{{ ultimo.fecha_act }}</td>
+                        <td>{{ reporte.nom_act }}</td>
+                        <td>{{ reporte.cant_valpos }}</td>
+                        <td>{{ reporte.fecha_act }}</td>
                         <td>
-                            {% if ultimo.acta_reu != '' %}
-                            <a href="{% static ultimo.acta_reu  %}" target="_blank" class="btn btn-info">Descargar</a>
+                            {% if reporte.acta_reu != '' %}
+                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_files }}" target="_blank" class="btn btn-info">Descargar</a>
                             {% endif %} 
                         </td>
                         <td>
@@ -258,16 +258,16 @@
                             {% endfor %}
                         </td>
                         <td>
-                            {% if ultimo.report_image != '' %}
-                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ ultimo.report_image }}" target="_blank" class="btn btn-link">link de la imagen</a>
+                            {% if reporte.report_image != '' %}
+                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_image }}" target="_blank" class="btn btn-link">link de la imagen</a>
                             {% endif %}
                         </td>
-                        <td>{{ ultimo.desc_act }}</td>
+                        <td>{{ reporte.desc_act }}</td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-        {% endif %}  
     </div>
 </div>
 

@@ -96,6 +96,8 @@ def Historial(request):
             ultimoReporte = Reporte.objects.all().values().last()
             ultper = splitData(request, ultimoReporte['nom_partici'])
             form = eliminarReporte(request)
+
+            reportes = Reporte.objects.all()
         except Exception as e:
             logger.error(e)
             ultimoReporte = ''
@@ -113,7 +115,9 @@ def Historial(request):
                 'ultimo':ultimoReporte,
                 'ultper':ultper,
                 'form':form,
-                'resultPago': refresh[1], 
+                'resultPago': refresh[1],
+
+                'reportes': reportes,
             }
             return render(request, "accTemplate/Historial.html", context = context)
    

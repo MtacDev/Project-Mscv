@@ -112,7 +112,7 @@ def Historial(request):
                 'imagen':request.session['imagen'],
                 'staff':request.session['staff'],
                 'por_confirm': por_confirm, 
-                'ultimo':ultimoReporte,
+                # 'ultimo':ultimoReporte,
                 'ultper':ultper,
                 'form':form,
                 'resultPago': refresh[1],

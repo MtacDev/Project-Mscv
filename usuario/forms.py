@@ -16,7 +16,8 @@ class ReporteAct(forms.Form):
     ingrepart = forms.CharField(required= False ,widget= forms.Select
                            (attrs={'class':'remove form-control',
 				                  'id':'textarea2',
-                                  'multiple':'multiple',                                                        
+                                  'multiple':'multiple',
+                                  'selected': 'selected',
                                   }))
     imgAct = forms.ImageField(required=False, label='')
     descact = forms.CharField(required= True, widget=forms.Textarea(attrs={'rows':7, 

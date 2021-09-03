@@ -232,13 +232,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nombre de la actividad:</th>
-                        <th>Agradecimiento en Valpos:</th>
-                        <th>Actividad realizada el:</th>
-                        <th>Acta de reunión:</th>
-                        <th>Participantes de la actividad:</th>
-                        <th>Imágen de la actividad:</th>
-                        <th>Descripción de la actividad:</th>
+                        <th>Actividad</th>
+                        <th>Valpos</th>
+                        <th>Fecha Actividad</th>
+                        <th>Acta</th>
+                        <th>Participantes</th>
+                        <th>Imágen</th>
+                        <th>Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -249,7 +249,7 @@
                         <td>{{ reporte.fecha_act }}</td>
                         <td>
                             {% if reporte.acta_reu != '' %}
-                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_files }}" target="_blank" class="btn btn-info">Descargar</a>
+                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_files }}" target="_blank" class="btn btn-primary">Ver</a>
                             {% endif %} 
                         </td>
                         <td>
@@ -259,7 +259,7 @@
                         </td>
                         <td>
                             {% if reporte.report_image != '' %}
-                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_image }}" target="_blank" class="btn btn-link">link de la imagen</a>
+                            <a href="https://valpoaws.s3.amazonaws.com/media/{{ reporte.report_image }}" target="_blank" class="btn btn-info">Ver</a>
                             {% endif %}
                         </td>
                         <td>{{ reporte.desc_act }}</td>
